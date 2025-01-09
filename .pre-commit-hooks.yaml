@@ -1,7 +1,7 @@
 - id: todo-md
   name: Update TODO.md
   entry: ./todo-md
-  language: system
+  language: script
   types: [text]
   require_serial: true
   description: |
