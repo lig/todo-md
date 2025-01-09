@@ -1,0 +1,9 @@
+- id: todo-md
+  name: Update TODO.md
+  entry: ./todo-md
+  language: system
+  types: [text]
+  require_serial: true
+  description: |
+    `todo-md` is a small pre-commit hook implemented in Bash that maintains `TODO.md`
+    file in your repo. See: https://codeberg.org/lig/todo-md.

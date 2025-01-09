@@ -1,0 +1,25 @@
+#!/bin/bash
+
+TODO_FILE='./TODO.md'
+touch $TODO_FILE
+
+for filename in "$@"; do
+    sed -i "/${filename//\//\\/}/d" $TODO_FILE
+    readarray -t entries < <(grep \
+        --perl-regexp \
+        --line-number \
+        --only-matching \
+        --with-filename \
+        '(?<=(^|\s)TODO:).*' "$filename")
+    if [ -z "${entries[*]}" ]; then
+        continue
+    fi
+
+    for entry in "${entries[@]}"; do
+        IFS=':' read -r file line_number text <<< "$entry"
+        echo "* [$file:$line_number]($file#$line_number): $text" >> $TODO_FILE
+    done
+done
+
+sort -o ${TODO_FILE} ${TODO_FILE}
+git diff ${TODO_FILE} | cat
