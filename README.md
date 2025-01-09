@@ -6,8 +6,9 @@
 
 - Automatically scans your staged files for `TODO:` comments.
 - Updates `TODO.md` with references to the files, line numbers, and corresponding comments.
-- Maintains an organized, sorted `TODO.md` file.
 - Removes outdated entries from `TODO.md` when tasks are removed from the code.
+- Uses Forge (e.g. Codeberg or GitHub) style `#L<line number>` links that work in a Forge UI.
+- Uses IDE style `:<line number>` text for links that are being recognized in terminal output by most of IDEs.
 
 ## Usage
 
