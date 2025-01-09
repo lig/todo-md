@@ -61,7 +61,7 @@ def example():
 `TODO.md` will be updated as:
 
 ```markdown
-* [path/to/file:2](path/to/file#2): Refactor this function
+* [path/to/file:2](path/to/file#L2): Refactor this function
 ```
 
 See [TODO.md in this repo](TODO.md) for the real one. :)
