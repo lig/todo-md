@@ -42,7 +42,7 @@
 - It updates `TODO.md` in the root of the repository with entries in the format:
 
     ```markdown
-    * [path/to/file:line_number](path/to/file#line_number): The TODO comment text
+    * [path/to/file:<line_number>](path/to/file#L<line_number>): The TODO comment text
     ```
 
 - Outdated entries (corresponding to removed `TODO:` comments) are removed automatically.
