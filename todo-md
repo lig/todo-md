@@ -17,7 +17,7 @@ for filename in "$@"; do
 
     for entry in "${entries[@]}"; do
         IFS=':' read -r file line_number text <<< "$entry"
-        echo "* [$file:$line_number]($file#L$line_number): $text" >> $TODO_FILE
+        echo "* [$file:$line_number]($file#L$line_number):$text" >> $TODO_FILE
     done
 done
 
