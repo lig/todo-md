@@ -4,7 +4,8 @@
   language: script
   types: [text]
   always_run: true
-  pass_filenames: false
+  pass_filenames: true
+  require_serial: true
   description: |
     `todo-md` is a small pre-commit hook implemented in Bash that maintains `TODO.md`
     file in your repo. See: https://codeberg.org/lig/todo-md.

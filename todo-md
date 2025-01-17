@@ -1,2 +1,2 @@
 #!/bin/bash
-git diff --name-only --cached | xargs $(dirname $0)/todo-md-updater
+git diff --diff-filter=D --name-only --cached | xargs $(dirname $0)/todo-md-updater "$@"
