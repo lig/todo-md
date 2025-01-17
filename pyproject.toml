@@ -1,0 +1,38 @@
+[project]
+name = "todo-md-tests"
+version = "0.1.0"
+description = "TODO.md test suit see ./tests"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "inline-snapshot>=0.19.3",
+    "mypy>=1.14.1",
+    "pytest>=8.3.4",
+    "ruff>=0.9.2",
+]
+
+[tool.mypy]
+explicit_package_bases = true
+warn_unused_ignores = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+verbosity_assertions = 2
+verbosity_test_cases = 2
+
+[tool.ruff.lint]
+extend-select = ["I", "UP", "RUF"]
+
+[tool.ruff.lint.isort]
+lines-after-imports = 2
+split-on-trailing-comma = false
+
+[tool.ruff.format]
+quote-style = "single"
+skip-magic-trailing-comma = true
+
+[tool.inline-snapshot]
+format-command="ruff format --stdin-filename {filename}"

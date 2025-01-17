@@ -1,0 +1,9 @@
+.*
+*~
+*.py[co]
+__pycache__
+
+!.gitignore
+
+!/.pre-commit-config.yaml
+!/.pre-commit-hooks.yaml
