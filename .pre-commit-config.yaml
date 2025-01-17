@@ -30,7 +30,7 @@ repos:
         pass_filenames: false
         files: "pyproject.toml"
   - repo: .
-    rev: v1.0.2
+    rev: v1.1.0
     hooks:
       - id: todo-md
         exclude: '^tests/samples/'

@@ -21,7 +21,7 @@
     ```yaml
     repos:
         - repo: https://codeberg.org/lig/todo-md.git
-          rev: v1.0.2
+          rev: v1.1.0
           hooks:
               - id: todo-md
     ```
