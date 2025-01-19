@@ -70,6 +70,10 @@ See [TODO.md in this repo](TODO.md) for the real one. :)
 
 Contributions are welcome! Feel free to submit issues or pull requests to the project repository: [todo-md on Codeberg](https://codeberg.org/lig/todo-md).
 
+## Support & Community
+
+Feel free to ask a question or request a feature in [Issues](https://codeberg.org/lig/todo-md/issues) or join our [chat on Matrix](https://matrix.to/#/#todomd:dabar.chat).
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
