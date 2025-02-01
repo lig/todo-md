@@ -1,3 +1,0 @@
-#!/bin/bash
-git diff --no-renames --diff-filter=D --name-only --cached \
-    | xargs "$(dirname "$0")"/todo-md-updater "$@"

@@ -7,3 +7,5 @@ __pycache__
 
 !/.pre-commit-config.yaml
 !/.pre-commit-hooks.yaml
+
+/build

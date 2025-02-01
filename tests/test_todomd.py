@@ -7,7 +7,7 @@ import typing
 import pytest
 from inline_snapshot import snapshot
 
-from pytodomd import TODOMD_UPDATER, TODOMD_UPDATER_NAME, run
+from pytodomd import TODOMD_BIN, TODOMD_BIN_NAME, run
 
 
 class Dirs(typing.NamedTuple):
@@ -72,8 +72,8 @@ def test_todomd(
     ]
 
     shutil.copytree(samples_dirs.a, tmp_dirs.a, dirs_exist_ok=True)
-    todomd_updater = tmp_dirs.a / TODOMD_UPDATER_NAME
-    shutil.copy(TODOMD_UPDATER, todomd_updater)
+    todomd_updater = tmp_dirs.a / TODOMD_BIN_NAME
+    shutil.copy(TODOMD_BIN, todomd_updater)
 
     os.chdir(tmp_dirs.a)
     run(todomd_bin=todomd_updater, files=files_a)
@@ -91,8 +91,8 @@ def test_todomd(
     ]
 
     shutil.copytree(samples_dirs.b, tmp_dirs.b, dirs_exist_ok=True)
-    todomd_updater = tmp_dirs.b / TODOMD_UPDATER_NAME
-    shutil.copy(TODOMD_UPDATER, todomd_updater)
+    todomd_updater = tmp_dirs.b / TODOMD_BIN_NAME
+    shutil.copy(TODOMD_BIN, todomd_updater)
 
     os.chdir(tmp_dirs.b)
     run(todomd_bin=todomd_updater, files=files_b)
