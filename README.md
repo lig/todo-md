@@ -1,6 +1,6 @@
 # TODO.md Pre-Commit Hook
 
-`todo-md` is a pre-commit hook written in Bash that automatically maintains a `TODO.md` file in your repository. It collects `TODO:` comments from your code and organizes them into a markdown file, making it easy to track tasks and improvements.
+`todo-md` is a pre-commit hook written in Go that automatically maintains a `TODO.md` file in your repository. It collects `TODO:` comments from your code and organizes them into a markdown file, making it easy to track tasks and improvements.
 
 ## Features
 
