@@ -82,3 +82,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 - [CPython](https://github.com/lig/cpython/blob/master/TODO.md)
 - [Git](https://github.com/lig/git/blob/master/TODO.md)
+- [Go](https://github.com/lig/go/blob/master/TODO.md)
