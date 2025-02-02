@@ -80,6 +80,7 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Examples of TODO.md generated for some Open Source Projects
 
-- [CPython](https://github.com/lig/cpython/blob/master/TODO.md)
-- [Git](https://github.com/lig/git/blob/master/TODO.md)
-- [Go](https://github.com/lig/go/blob/master/TODO.md)
+- [CPython](https://github.com/lig/cpython/blob/master/TODO.md) (187 TODOs)
+- [Linux](https://github.com/lig/linux/blob/master/TODO.md) (3788 TODOs)
+- [Git](https://github.com/lig/git/blob/master/TODO.md) (112 TODOs)
+- [Go](https://github.com/lig/go/blob/master/TODO.md) (455 TODOs)
