@@ -64,7 +64,7 @@ def example():
 * [path/to/file:2](path/to/file#L2): Refactor this function
 ```
 
-See a [list of forks of popular projects](#examples-of-todomd-generated-for-some-open-source-projects) with `TODO.md` file generated using this hook. :)
+See a [list of forks of popular projects](#examples-of-todo-md-generated-for-some-open-source-projects) with `TODO.md` file generated using this hook. :)
 
 ## Contributing
 
