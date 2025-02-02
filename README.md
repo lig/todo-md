@@ -64,7 +64,7 @@ def example():
 * [path/to/file:2](path/to/file#L2): Refactor this function
 ```
 
-See [TODO.md in this repo](TODO.md) for the real one. :)
+See a [list of forks of popular projects](#examples-of-todomd-generated-for-some-open-source-projects) with `TODO.md` file generated using this hook. :)
 
 ## Contributing
 
@@ -77,3 +77,7 @@ Feel free to ask a question or request a feature in [Issues](https://codeberg.or
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+## Examples of TODO.md generated for some Open Source Projects
+
+- https://github.com/lig/git/blob/master/TODO.md
