@@ -51,6 +51,17 @@ def samples_base_dir() -> pathlib.Path:
             snapshot([]),
             id='delete file',
         ),
+        pytest.param(
+            '004-numeric-ordering',
+            snapshot(
+                [
+                    '* [sample.txt:2](sample.txt#L2): todo text on line 2',
+                    '* [sample.txt:10](sample.txt#L10): todo text on line 10',
+                ]
+            ),
+            snapshot([]),
+            id='delete file',
+        ),
     ],
 )
 def test_todomd(

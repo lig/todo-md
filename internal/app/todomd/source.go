@@ -3,7 +3,6 @@ package todomd
 import (
 	"bufio"
 	"errors"
-	"fmt"
 	"io/fs"
 	"os"
 	"regexp"
@@ -11,12 +10,14 @@ import (
 	"sync"
 )
 
-func extractActiveTodos(filenames []string) (todos []string, err error) {
+var sourceRegex = regexp.MustCompile(`(^|\s)TODO:\s*(?P<todo>.*$)`)
+
+func extractActiveTodos(filenames []string) (todos []*Todo, err error) {
 	var wg sync.WaitGroup
 	maxGoroutines := runtime.NumCPU()
 	semaphore := make(chan struct{}, maxGoroutines)
 
-	todoCh := make(chan []string, len(filenames))
+	todoCh := make(chan []*Todo, len(filenames))
 	errCh := make(chan error, len(filenames))
 
 	for _, filename := range filenames {
@@ -26,7 +27,7 @@ func extractActiveTodos(filenames []string) (todos []string, err error) {
 			defer wg.Done()
 			defer func() { <-semaphore }()
 
-			fileTodos, err := extractTodosFromFile(filename)
+			fileTodos, err := extractTodosFromSourceFile(filename)
 			if err != nil {
 				errCh <- err
 				return
@@ -52,7 +53,7 @@ func extractActiveTodos(filenames []string) (todos []string, err error) {
 	return todos, nil
 }
 
-func extractTodosFromFile(filename string) (entries []string, err error) {
+func extractTodosFromSourceFile(filename string) (entries []*Todo, err error) {
 	file, err := os.Open(filename)
 	switch {
 	case errors.Is(err, fs.ErrNotExist):
@@ -69,8 +70,12 @@ func extractTodosFromFile(filename string) (entries []string, err error) {
 		lineNumber++
 		line := scanner.Text()
 
-		if todo := extractTodoFromLine(line); todo != "" {
-			entries = append(entries, fmt.Sprintf("* [%[1]s:%[2]d](%[1]s#L%[2]d): %[3]s", filename, lineNumber, todo))
+		if text := extractTextFromSourceLine(line); text != "" {
+			entries = append(entries, &Todo{
+				Filename:   filename,
+				LineNumber: lineNumber,
+				Text:       text,
+			})
 		}
 	}
 
@@ -81,9 +86,8 @@ func extractTodosFromFile(filename string) (entries []string, err error) {
 	return entries, nil
 }
 
-func extractTodoFromLine(line string) string {
-	re := regexp.MustCompile(`(^|\s)TODO:\s*(?P<todo>.*$)`)
-	matches := re.FindStringSubmatch(line)
+func extractTextFromSourceLine(line string) string {
+	matches := sourceRegex.FindStringSubmatch(line)
 
 	if len(matches) > 0 {
 		return matches[2]

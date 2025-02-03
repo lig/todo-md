@@ -4,13 +4,19 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"slices"
+	"regexp"
+	"sort"
+	"strconv"
 	"strings"
+	"text/template"
 )
 
 const TODO_FILE = "./TODO.md"
+const TODO_TEMPLATE = "* [{{.Filename}}:{{.LineNumber}}]({{.Filename}}#L{{.LineNumber}}): {{.Text}}\n"
 
-func loadTodosToKeep(todoFile *os.File, filenames []string) (todos []string, err error) {
+var todoRegex = regexp.MustCompile(`^* \[.*?\]\((?P<filename>.+?)#L(?P<lineNumber>\d+)\): (?P<text>.*)$`)
+
+func loadTodosToKeep(todoFile *os.File, filenames []string) (todos []*Todo, err error) {
 	scanner := bufio.NewScanner(todoFile)
 	for scanner.Scan() {
 		line := scanner.Text()
@@ -24,14 +30,23 @@ func loadTodosToKeep(todoFile *os.File, filenames []string) (todos []string, err
 		}
 
 		if shouldInclude {
-			todos = append(todos, line)
+			todo, err := extractTodoFromTodoLine(line)
+			if err != nil {
+				return nil, err
+			}
+			todos = append(todos, todo)
 		}
 	}
 
 	return todos, scanner.Err()
 }
 
-func writeTodosToFile(todoFile *os.File, lines []string) error {
+func writeTodosToFile(todoFile *os.File, todos []*Todo) error {
+	todoTemplate, err := template.New("todoTemplate").Parse(TODO_TEMPLATE)
+	if err != nil {
+		return err
+	}
+
 	if err := todoFile.Truncate(0); err != nil {
 		return err
 	}
@@ -39,13 +54,28 @@ func writeTodosToFile(todoFile *os.File, lines []string) error {
 		return err
 	}
 
-	// TODO: #13 Sort with respect to line numbers numeric values
-	slices.Sort(lines)
-	// TODO: Do not join lines in memory
-	content := strings.Join(lines, "\n")
-	if content != "" {
-		content += "\n"
+	sort.Slice(todos, func(i, j int) bool {
+		a, b := todos[i], todos[j]
+		return a.Filename < b.Filename && a.LineNumber < b.LineNumber
+	})
+
+	for _, todo := range todos {
+		err = todoTemplate.Execute(todoFile, todo)
+		if err != nil {
+			return err
+		}
 	}
-	_, err := todoFile.WriteString(content)
+
 	return err
+}
+
+func extractTodoFromTodoLine(line string) (*Todo, error) {
+	matches := todoRegex.FindStringSubmatch(line)
+
+	filename, lineNumberStr, text := matches[1], matches[2], matches[3]
+	lineNumber, err := strconv.Atoi(lineNumberStr)
+	if err != nil {
+		return nil, err
+	}
+	return &Todo{Filename: filename, LineNumber: lineNumber, Text: text}, nil
 }
