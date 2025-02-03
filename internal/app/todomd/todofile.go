@@ -39,7 +39,9 @@ func writeTodosToFile(todoFile *os.File, lines []string) error {
 		return err
 	}
 
+	// TODO: #13 Sort with respect to line numbers numeric values
 	slices.Sort(lines)
+	// TODO: Do not join lines in memory
 	content := strings.Join(lines, "\n")
 	if content != "" {
 		content += "\n"
