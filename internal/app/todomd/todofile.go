@@ -54,9 +54,15 @@ func writeTodosToFile(todoFile *os.File, todos []*Todo) error {
 		return err
 	}
 
-	sort.Slice(todos, func(i, j int) bool {
-		a, b := todos[i], todos[j]
-		return a.Filename < b.Filename && a.LineNumber < b.LineNumber
+	sort.SliceStable(todos, func(i, j int) bool {
+		switch a, b := todos[i], todos[j]; {
+		case a.Filename < b.Filename:
+			return true
+		case a.Filename == b.Filename && a.Filename < b.Filename:
+			return true
+		default:
+			return false
+		}
 	})
 
 	for _, todo := range todos {
