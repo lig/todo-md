@@ -1,6 +1,6 @@
 [project]
 name = "todo-md-tests"
-version = "2.0.2"
+version = "2.0.3"
 description = "TODO.md test suit see ./tests"
 readme = "README.md"
 requires-python = ">=3.13"
