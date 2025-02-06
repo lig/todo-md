@@ -79,7 +79,11 @@ func extractTodosFromSourceFile(filename string) (entries []*Todo, err error) {
 		}
 	}
 
-	if err := scanner.Err(); err != nil {
+	switch err := scanner.Err(); {
+	// One line is larger than 64k, it's probably not a file written by a human
+	case errors.Is(err, bufio.ErrTooLong):
+		return entries, nil
+	case err != nil:
 		return nil, err
 	}
 
